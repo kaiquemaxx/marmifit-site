@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MarmiFit — Marmitas Fitness & Doces para Intolerantes</title>
+<meta name="description" content="Marmitas fitness balanceadas e doces para intolerantes (sem lactose, sem glúten, low carb). Entrega rápida.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Calistoga&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* paleta inspirada no logo */
+    --bg:#0b0f0c; --surface:#0f1411; --glass:rgba(255,255,255,.07);
+    --text:#f4f7f2; --muted:#a7b5a8;
+    --brand:#2e7d32;      /* verde escuro */
+    --brand-2:#66bb6a;    /* verde médio */
+    --brand-3:#a5d6a7;    /* verde claro */
+    --danger:#ff8a6a; --ok:#2ecc71;
+    --radius:18px; --shadow:0 22px 50px rgba(0,0,0,.35); --max:1160px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:auto;padding:0 20px}
+
+  /* Fundo decorativo */
+  .bg{position:fixed; inset:0; z-index:-2; overflow:hidden;
+      background: radial-gradient(1200px 700px at 80% -10%, rgba(165,214,167,.18), transparent 60%),
+                 radial-gradient(900px 600px at -10% 110%, rgba(46,125,50,.18), transparent 60%),
+                 radial-gradient(900px 600px at 120% 60%, rgba(102,187,106,.10), transparent 60%);}
+  .blob{position:absolute; filter:blur(38px); opacity:.45; animation:float 18s ease-in-out infinite}
+  .blob.one{width:420px;height:420px;left:5%;top:10%; background:conic-gradient(from 120deg,var(--brand),var(--brand-2),var(--brand-3))}
+  .blob.two{width:360px;height:360px;right:8%;top:40%; background:conic-gradient(from -60deg,var(--brand-3),#0000,var(--brand))}
+  .blob.three{width:300px;height:300px;left:40%;bottom:-6%; background:conic-gradient(from 40deg,var(--brand-2),#0000,var(--brand))}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(30deg)}}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:40;backdrop-filter:saturate(160%) blur(10px);
+    background:linear-gradient(to bottom, rgba(8,12,9,.85), rgba(8,12,9,.45)); border-bottom:1px solid var(--glass)}
+  .nav{height:78px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:44px;height:44px;border-radius:10px;background:#1c241e;border:1px solid var(--glass)}
+  .brand-name{font-family:Calistoga,Inter,system-ui,sans-serif;font-size:22px;letter-spacing:.2px}
+  nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+  nav a{padding:10px 12px;border-radius:12px;color:var(--muted)}
+  nav a:hover{background:var(--glass);color:var(--text)}
+  .cta{display:inline-flex;gap:10px;align-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    color:#082216;padding:12px 18px;border-radius:14px;font-weight:800;box-shadow:var(--shadow);
+    transform:translateY(0);transition:transform .08s ease, filter .2s}
+  .cta:hover{transform:translateY(-2px);filter:saturate(120%)}
+  .cta svg{width:18px;height:18px}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:48px 0 28px}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--brand-3);font-size:12px}
+  .hero h1{font-family:Calistoga,Inter,system-ui,sans-serif;font-size:clamp(32px,5vw,64px);line-height:1.02;margin:10px 0}
+  .hero p{color:var(--muted);margin:0 0 18px}
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px}
+  .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);color:#d9e3da;border:1px solid var(--glass)}
+
+  /* Cards/Seções */
+  .panel{background:rgba(255,255,255,.04);border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .panel .body{padding:18px}
+  .list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .item{display:flex;gap:12px;background:rgba(0,0,0,.25);border:1px solid var(--glass);border-radius:14px;padding:12px;transition:transform .1s}
+  .item:hover{transform:translateY(-2px)}
+  .item img{width:78px;height:78px;border-radius:12px;object-fit:cover}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .price{font-weight:800}
+  .section{padding:16px 0 8px}
+  .section-title{display:flex;justify-content:space-between;align-items:end;margin:26px 0 12px}
+  .section-title h2{margin:0;font-family:Calistoga,Inter,system-ui,sans-serif;font-size:clamp(24px,3.3vw,40px)}
+  .note{font-size:13px;color:var(--muted)}
+  .grid{display:grid;gap:18px}
+  .menu{grid-template-columns:repeat(12,1fr)}
+  .card{background:rgba(255,255,255,.05);backdrop-filter:blur(4px);border:1px solid var(--glass);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-height:100%}
+  .card .body{padding:16px}
+  .pill{font-size:12px;border:1px solid var(--glass);padding:6px 10px;border-radius:999px}
+  .warn{display:inline-flex;gap:8px;align-items:center;background:rgba(255,138,106,.12);border:1px solid rgba(255,138,106,.38);
+    padding:8px 10px;border-radius:10px;color:#ffc7b6;font-size:12px}
+
+  /* Contato */
+  .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin:28px 0 40px}
+  .contact .form,.contact .map{border:1px solid var(--glass);border-radius:18px;background:rgba(255,255,255,.04);overflow:hidden}
+  .contact .form{padding:18px}
+  label{font-size:13px;color:var(--muted)}
+  input,textarea{width:100%;margin-top:6px;margin-bottom:12px;padding:12px;border-radius:10px;border:1px solid var(--glass);background:#101710;color:var(--text)}
+  .whapp-fab{position:fixed;right:16px;bottom:16px;z-index:30}
+  .whapp-fab a{display:inline-flex;gap:8px;align-items:center;padding:12px 14px;border-radius:999px;background:#25D366;color:#062a14;font-weight:800;box-shadow:var(--shadow)}
+
+  footer{border-top:1px solid var(--glass);padding:18px 0 28px;color:var(--muted);font-size:14px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--glass),transparent);margin:16px 0}
+
+  /* Responsive */
+  @media (max-width: 980px){
+    .hero{grid-template-columns:1fr}
+    .list{grid-template-columns:1fr}
+    .contact{grid-template-columns:1fr}
+    nav ul{display:none}
+  }
+  @media (min-width:980px){
+    .menu{grid-template-columns:repeat(12,1fr)}
+    .col-8{grid-column:span 8}
+    .col-4{grid-column:span 4}
+    .col-6{grid-column:span 6}
+    .col-3{grid-column:span 3}
+  }
+</style>
+</head>
+<body>
+<div class="bg"><div class="blob one"></div><div class="blob two"></div><div class="blob three"></div></div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <!-- Coloque Logo.jpg na mesma pasta do index -->
+      <img src="Logo.jpg" alt="Logo MarmiFit">
+      <span class="brand-name">MarmiFit</span>
+    </div>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#marmitas">Marmitas Fitness</a></li>
+        <li><a href="#doces">Doces Intolerantes</a></li>
+        <li><a href="#nutri">Nutricionistas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://wa.me/5554996289237?text=Olá!%20Quero%20pedir%20na%20MarmiFit%20💪" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.8 15.8 0 006.6 6.6l2.2-2.2a1 1 0 011.1-.2 11.5 11.5 0 003.6 1 1 1 0 011 .9v3.4a1 1 0 01-1 1A18.6 18.6 0 013 5a1 1 0 011-1h3.5a1 1 0 011 .9c.1 1.2.4 2.4 1 3.6a1 1 0 01-.2 1.1L6.6 10.8z"/></svg>
+      Pedir
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <span class="eyebrow">💚 Nutrição prática • pronto pra comer</span>
+      <h1 id="hero-title">Marmitas fitness & doces sem culpa — do seu jeito</h1>
+      <p>Planos por macro, opções low carb, sem lactose e sem glúten. Entrega rápida e sabor real.</p>
+      <div class="badge-row" role="list" aria-label="Diferenciais">
+        <span class="badge" role="listitem">Proteínas magras</span>
+        <span class="badge" role="listitem">Sem fritura</span>
+        <span class="badge" role="listitem">Doces SL/SG</span>
+        <span class="badge" role="listitem">Veg & Low carb</span>
+      </div>
+      <div class="divider"></div>
+      <div class="row" style="gap:8px;"><span>⭐⭐⭐⭐⭐</span><span class="muted">4.9 • 320+ avaliações</span></div>
+    </div>
+
+    <div class="panel" aria-label="Destaques de hoje">
+      <div class="body">
+        <div class="row" style="margin-bottom:8px">
+          <strong>Destaques de hoje</strong>
+          <span class="pill">Seg–Sáb</span>
+        </div>
+        <div class="list">
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1514517220033-e723cd5044ce?q=80&w=800&auto=format&fit=crop" alt="Marmita de frango grelhado com legumes" loading="lazy">
+            <div>
+              <div class="row"><strong>Fit Frango 500g</strong><span class="price">R$ 26,90</span></div>
+              <p class="muted">Arroz integral, frango, legumes — 38g prot.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1541782814455-c3df94c7c0e5?q=80&w=800&auto=format&fit=crop" alt="Cheesecake low carb" loading="lazy">
+            <div>
+              <div class="row"><strong>Cheesecake Low Carb</strong><span class="price">R$ 14,00</span></div>
+              <p class="muted"><span class="pill">Sem glúten</span> <span class="pill">Sem lactose</span></p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=800&auto=format&fit=crop" alt="Quinoa com grão-de-bico" loading="lazy">
+            <div>
+              <div class="row"><strong>Veggie Quinoa 500g</strong><span class="price">R$ 25,90</span></div>
+              <p class="muted">Quinoa, grão-de-bico, legumes assados.</p>
+            </div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:8px">Peça no WhatsApp <strong>(54) 99628-9237</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARMITAS FITNESS -->
+  <section id="marmitas" class="section menu grid">
+    <div class="section-title col-8">
+      <h2>Cardápio — Marmitas Fitness</h2>
+      <span class="note">Tamanhos 500g/700g • Trocas sem custo</span>
+    </div>
+
+    <div class="col-8 grid" style="grid-template-columns:repeat(2,1fr);gap:18px">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1400&auto=format&fit=crop" alt="Frango grelhado com integral e legumes" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Frango Grelhado (Cut)</h3><span class="price">R$ 26,90</span></div>
+          <p class="muted">Arroz integral, frango, legumes. <span class="pill">38g prot</span> <span class="pill">Baixa gordura</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1542444459-db63c9f5b4d3?q=80&w=1400&auto=format&fit=crop" alt="Carne magra com purê de batata-doce" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Carne Magra + Batata-doce</h3><span class="price">R$ 29,90</span></div>
+          <p class="muted">Patinho, purê de batata-doce, brócolis. <span class="pill">41g prot</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1400&auto=format&fit=crop" alt="Salmão grelhado com quinoa" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Salmão & Quinoa (Ômega)</h3><span class="price">R$ 34,90</span></div>
+          <p class="muted">Salmão, mix de legumes e quinoa. <span class="pill">Saudável</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1400&auto=format&fit=crop" alt="Quinoa com grão-de-bico" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Vegana Power</h3><span class="price">R$ 25,90</span></div>
+          <p class="muted">Quinoa, grão-de-bico, legumes assados. <span class="pill">Rica em fibras</span></p>
+        </div>
+      </article>
+    </div>
+
+    <aside class="col-4 card" aria-label="Combos e assinaturas">
+      <div class="body">
+        <h3 style="margin:0 0 8px">Combos Fitness</h3>
+        <ul style="margin:8px 0 0 18px;line-height:1.8">
+          <li>5 marmitas (500g) — <strong>R$ 129,00</strong></li>
+          <li>10 marmitas (congele) — <strong>R$ 249,00</strong></li>
+          <li>Plano semanal (seg–sex) — <strong>R$ 109,00</strong></li>
+        </ul>
+        <p class="muted">Entrega grátis na região central.</p>
+        <a class="cta" href="https://wa.me/5554996289237?text=Quero%20um%20combo%20fitness%20da%20MarmiFit!" target="_blank" rel="noopener">Pedir combo</a>
+      </div>
+    </aside>
+  </section>
+
+  <!-- DOCES INTOLERANTES -->
+  <section id="doces" class="section menu grid">
+    <div class="section-title col-8">
+      <h2>Doces para Intolerantes</h2>
+      <span class="note"><span class="pill">Sem lactose</span> <span class="pill">Sem glúten</span> <span class="pill">Low carb</span></span>
+    </div>
+
+    <div class="col-8 grid" style="grid-template-columns:repeat(3,1fr);gap:18px">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1599785209796-9e3f1caf58ae?q=80&w=1400&auto=format&fit=crop" alt="Brownie sem glúten e sem lactose" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Brownie Cacau 70%</h3><span class="price">R$ 12,00</span></div>
+          <p class="muted"><span class="pill">SG</span> <span class="pill">SL</span> — adoçado com xilitol.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=1400&auto=format&fit=crop" alt="Brigadeiros zero lactose" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Brigadeiro Zero Lactose</h3><span class="price">R$ 4,00 un</span></div>
+          <p class="muted">Leite condensado SL, chocolate 50%.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1541782814455-c3df94c7c0e5?q=80&w=1400&auto=format&fit=crop" alt="Cheesecake low carb" loading="lazy">
+        <div class="body">
+          <div class="row"><h3 style="margin:0">Cheesecake Low Carb</h3><span class="price">R$ 14,00</span></div>
+          <p class="muted"><span class="pill">SG</span> <span class="pill">SL</span> — base de amêndoas.</p>
+        </div>
+      </article>
+    </div>
+
+    <aside class="col-4 card" aria-label="Avisos de alergênicos" style="align-self:start">
+      <div class="body">
+        <h3 style="margin:0 0 6px">Transparência de Alergênicos</h3>
+        <p class="muted">Apesar do cuidado, pode haver <em>traços</em> de glúten/lactose por manipulação compartilhada.</p>
+        <div class="warn">Informe alergias no pedido • Consulte rótulos.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- NUTRICIONISTAS -->
+  <section id="nutri" class="section menu grid">
+    <div class="section-title col-8">
+      <h2>Suporte de Nutricionistas</h2>
+      <span class="note">Ajuste metas de macros e restrições com profissional.</span>
+    </div>
+
+    <div class="col-8 card">
+      <div class="body">
+        <p class="muted">Precisa de acompanhamento? Encontre nutricionistas próximos e agende online.</p>
+        <a class="cta" href="https://www.doctoralia.com.br/nutricionista" target="_blank" rel="noopener">Encontrar nutricionista agora</a>
+        <p class="muted" style="margin-top:10px;font-size:12px">Dica: nos chame no WhatsApp para adaptar o cardápio às recomendações.</p>
+      </div>
+    </div>
+
+    <aside class="col-4 card" aria-label="Planos por macro" style="align-self:start">
+      <div class="body">
+        <h3 style="margin:0 0 8px">Planos por Macro</h3>
+        <ul style="margin:8px 0 0 18px;line-height:1.8">
+          <li><strong>Cut</strong>: 35–45% prot, 25–35% carb, 20–30% gord</li>
+          <li><strong>Bulk limpo</strong>: 30% prot, 45% carb, 25% gord</li>
+          <li><strong>Low carb</strong>: 35% prot, 20% carb, 45% gord</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="contact">
+    <div class="form">
+      <h2 style="margin:0 0 6px;font-family:Calistoga,Inter,sans-serif">Contato & Horários</h2>
+      <p class="muted" style="margin-top:0">Seg–Sáb 10h–20h • Dom 11h–16h</p>
+      <div class="grid" style="grid-template-columns:repeat(2,1fr);gap:12px">
+        <div><label>Telefone</label><input type="tel" value="(54) 99628-9237" aria-label="Telefone" readonly></div>
+        <div><label>E-mail</label><input type="email" value="contato@marmifit.com.br" aria-label="E-mail" readonly></div>
+      </div>
+      <label>Mensagem</label>
+      <textarea rows="4" placeholder="Conte suas metas (peso, macros, restrições)..."></textarea>
+      <a class="cta" href="mailto:contato@marmifit.com.br?subject=Contato%20via%20site%20MarmiFit">Enviar e-mail</a>
+    </div>
+    <div class="map" aria-label="Mapa e endereço">
+      <iframe title="Mapa do endereço" src="https://www.google.com/maps?q=Cidade,+Rua+Exemplo&output=embed" loading="lazy" width="100%" height="360" style="border:0"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row" style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <span>© <span id="year"></span> MarmiFit</span>
+      <span>ANVISA <span class="pill" style="border-color:rgba(53,208,127,.4);color:#9bffd0">Regular</span></span>
+    </div>
+    <p class="muted" style="margin-top:8px">Fotos ilustrativas (Unsplash). Preços e macros estimados.</p>
+  </div>
+</footer>
+
+<!-- Botão flutuante WhatsApp -->
+<div class="whapp-fab">
+  <a href="https://wa.me/5554996289237?text=Olá%20MarmiFit!%20Quero%20fazer%20um%20pedido%20💚" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">WhatsApp</a>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.body.addEventListener('keyup', (e)=>{ if(e.key==='Tab'){ document.body.classList.add('kbd') }});
+</script>
+<style>
+  .kbd a:focus{outline:2px dashed var(--brand-3);outline-offset:3px}
+  details{padding:10px 0}
+  details summary{cursor:pointer;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details[open] summary{color:var(--brand-3)}
+</style>
+</body>
+</html>
