@@ -51,11 +51,23 @@ nav a:hover{background:var(--brand-3);color:var(--brand)}
   box-shadow:var(--shadow)}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:40px 0 24px}
+.hero{
+  display:grid;
+  grid-template-columns:1.4fr 0.9fr; /* deixa o texto mais largo e o painel mais proporcional */
+  gap:48px;                          /* mais espaço entre o texto e os cards */
+  align-items:center;
+  padding:40px 0 24px;
+}
+
 .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;
   border-radius:999px;background:var(--brand-3);color:var(--brand);font-size:12px}
-.hero h1{font-family:Calistoga,Inter,sans-serif;font-size:clamp(32px,5vw,64px);
-  line-height:1.05;margin:10px 0}
+.hero h1{
+  font-family:Calistoga,Inter,sans-serif;
+  font-size:clamp(36px,4.4vw,60px); /* leve redução */
+  line-height:1.1;                  /* deixa o texto mais “respirado” */
+  margin:6px 0 16px;
+}
+
 .hero p{color:var(--muted);margin:0 0 14px}
 .badge-row{display:flex;flex-wrap:wrap;gap:8px}
 .badge{font-size:12px;padding:6px 10px;border-radius:999px;
@@ -65,10 +77,33 @@ nav a:hover{background:var(--brand-3);color:var(--brand)}
 .panel{background:var(--surface);border:1px solid var(--glass);
   border-radius:var(--radius);box-shadow:var(--shadow)}
 .panel .body{padding:16px}
-.list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.item{display:flex;gap:12px;background:#f6fff7;border:1px solid var(--glass);
-  border-radius:14px;padding:12px}
-.item img{width:78px;height:78px;border-radius:12px;object-fit:cover}
+.list{
+  display:flex;
+  gap:20px; /* aumenta o espaçamento entre os cards */
+  justify-content:space-evenly; /* distribui melhor na linha */
+  align-items:stretch;
+}
+
+.item{
+  flex:1;
+  min-width:240px; /* aumenta a largura horizontal de cada card */
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:space-between;
+  background:#f6fff7;
+  border:1px solid var(--glass);
+  border-radius:14px;
+  padding:16px; /* leve aumento no espaçamento interno */
+  min-height:160px; /* mantém proporção vertical */
+}
+.item img{
+  width:78px;
+  height:78px;
+  border-radius:12px;
+  object-fit:cover;
+  align-self:center;
+}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .price{font-weight:800;color:var(--brand)}
 
@@ -132,7 +167,7 @@ footer{border-top:1px solid var(--glass);padding:16px 0 26px;color:var(--muted);
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
-    <a class="cta" href="https://wa.me/5554999999999?text=Quero%20pedir%20💚" target="_blank" rel="noopener">Pedir</a>
+    <a class="cta" href="https://wa.me/5554992042580?text=Quero%20pedir%20💚" target="_blank" rel="noopener">Pedir</a>
   </div>
 </header>
 
@@ -143,39 +178,36 @@ footer{border-top:1px solid var(--glass);padding:16px 0 26px;color:var(--muted);
       <span class="eyebrow">💚 Nutrição prática • pronto pra comer</span>
       <h1>Marmitas fitness & doces sem culpa — do seu jeito</h1>
       <p>Opções low carb, sem lactose e sem glúten. Entrega rápida e sabor de verdade.</p>
-      <div class="badge-row">
-        <span class="badge">Proteínas magras</span>
-        <span class="badge">Sem fritura</span>
-        <span class="badge">Doces SL/SG</span>
-        <span class="badge">Veg & Low carb</span>
-      </div>
       <div style="height:1px;background:linear-gradient(90deg,transparent,var(--glass),transparent);margin:14px 0"></div>
-      <div class="row"><span>⭐⭐⭐⭐⭐</span><span class="note">4.9 • 320+ avaliações</span></div>
+      <div class="row"><span>⭐⭐⭐⭐⭐</span><span class="note">4.9 • 10+ avaliações</span></div>
     </div>
 
-    <div class="panel" aria-label="Destaques">
-      <div class="body">
-        <div class="row" style="margin-bottom:8px">
-          <strong>Destaques de hoje</strong><span class="pill">Seg–Sáb</span>
-        </div>
-        <div class="list">
-          <div class="item">
-            <img src="https://images.unsplash.com/photo-1514517220033-e723cd5044ce?w=800&auto=format&fit=crop" alt="">
-            <div><div class="row"><strong>Fit Frango 500g</strong><span class="price">R$ 26,90</span></div>
-            <p class="note">Integral, frango, legumes — 38g prot.</p></div>
-          </div>
-          <div class="item">
-            <img src="https://images.unsplash.com/photo-1541782814455-c3df94c7c0e5?w=800&auto=format&fit=crop" alt="">
-            <div><div class="row"><strong>Cheesecake Low Carb</strong><span class="price">R$ 14,00</span></div>
-            <p class="note"><span class="pill">SG</span> <span class="pill">SL</span></p></div>
-          </div>
-          <div class="item">
-            <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?w=800&auto=format&fit=crop" alt="">
-            <div><div class="row"><strong>Penne integral </strong><span class="price">R$ 25,90</span></div>
-            <p class="note">com carne de peru e legumes</p></div>
-          </div>
-        </div>
-      </div>
+    <div class="list">
+  <div class="item">
+    <img src="FrangoGrelhhado.jpg" alt="">
+    <div>
+      <div class="row"><strong>Frango Grelhado</strong><span class="price">R$ 29,90</span></div>
+      <p class="note">Frango, arroz e salada</p>
+    </div>
+  </div>
+
+  <div class="item">
+    <img src="brigadeirofit.png" alt="">
+    <div>
+      <div class="row"><strong>Brigadeiro Fit</strong><span class="price">R$ 20,00</span></div>
+      <p class="note">Kit com 22 unidades</p>
+    </div>
+  </div>
+
+  <div class="item">
+    <img src="carnedepanela.png" alt="">
+    <div>
+      <div class="row"><strong>Carne de Panela</strong><span class="price">R$ 25,90</span></div>
+      <p class="note">Carne de panela com legumes e purê de batata</p>
+    </div>
+  </div>
+</div>
+
     </div>
   </section>
 
@@ -188,30 +220,30 @@ footer{border-top:1px solid var(--glass);padding:16px 0 26px;color:var(--muted);
 
     <div class="col-8 grid" style="grid-template-columns:repeat(2,1fr);gap:16px">
       <article class="card">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1400&auto=format&fit=crop" alt="">
+        <img src="frangoearroz.jpg" alt="">
         <div class="body">
-          <div class="row"><h3 style="margin:0">Frango Grelhado</h3><span class="price">R$ 26,90</span></div>
-          <p class="note">Arroz integral, frango, legumes. <span class="pill">38g prot</span></p>
+          <div class="row"><h3 style="margin:0">Frango Grelhado</h3><span class="price">R$ 25,90</span></div>
+          <p class="note">Arroz integral, frango, legumes.</p>
         </div>
       </article>
       <article class="card">
         <img src="carneebatata.png" alt="">
         <div class="body">
           <div class="row"><h3 style="margin:0">Carne Magra + Batata</h3><span class="price">R$ 29,90</span></div>
-          <p class="note">Patinho, purê batata-doce, brócolis. <span class="pill">41g prot</span></p>
+          <p class="note">Patinho, purê batata-doce, brócolis.</p>
         </div>
       </article>
       <article class="card">
-        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=1400&auto=format&fit=crop" alt="">
+        <img src="salmaoequinoa.jpg" alt="">
         <div class="body">
-          <div class="row"><h3 style="margin:0">Salmão & Quinoa</h3><span class="price">R$ 34,90</span></div>
+          <div class="row"><h3 style="margin:0">Salmão & Quinoa</h3><span class="price">R$ 31,90</span></div>
           <p class="note">Salmão, quinoa, legumes.</p>
         </div>
       </article>
       <article class="card">
-        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?w=1400&auto=format&fit=crop" alt="">
+        <img src="almondegasdefrango.png" alt="">
         <div class="body">
-          <div class="row"><h3 style="margin:0">Vegana Power</h3><span class="price">R$ 25,90</span></div>
+          <div class="row"><h3 style="margin:0">Almôndegas de Frango ao Molho de Tomates</h3><span class="price">R$ 25,90</span></div>
           <p class="note">Quinoa, grão-de-bico, legumes assados.</p>
         </div>
       </article>
